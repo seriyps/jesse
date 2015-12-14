@@ -13,7 +13,7 @@ DIALYZER := dialyzer
 
 # Travis CI is slow at building dialyzer PLT
 ifeq ($(TRAVIS), true)
-	OTP_VSN := $(shell erl -noshell -eval 'io:format("~p", [erlang:system_info(otp_release)]), erlang:halt(0).' | perl -lne 'print for /^R?(\d+).*/g')
+	OTP_VSN := $(shell erl -noshell -eval 'io:format("~p", [erlang:system_info(otp_release)]), erlang:halt(0).' | perl -lne 'print for /^(?:"R)?(\d+).*/g')
 	NO_DIALYZER := $(shell expr $(OTP_VSN) \<= 16 )
 
 	ifeq ($(NO_DIALYZER), 1)
